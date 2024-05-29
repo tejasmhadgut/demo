@@ -1,63 +1,83 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand to="/" class="navbar-brand">
-        <img src="/assets/images/beacon_logo.svg" width="90px" height="50px" />
-      </b-navbar-brand>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+      <router-link to="/" class="navbar-brand">
+        <img
+          src="../assets/images/beacon_logo.svg"
+          width="90px"
+          height="50px"
+          alt="Beacon Logo"
+        />
+      </router-link>
 
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#nav-collapse"
+        aria-controls="nav-collapse"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-nav-item to="/" exact exact-active-class="active"
-            >About BEACON</b-nav-item
+      <div class="collapse navbar-collapse" id="nav-collapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item" :class="{ active: $route.path === '/' }">
+            <router-link to="/" class="nav-link">About BEACON</router-link>
+          </li>
+          <li
+            class="nav-item"
+            :class="{ active: $route.path === '/emergencyInformation' }"
           >
-          <b-nav-item
-            to="/emergencyInformation"
-            exact
-            exact-active-class="active"
-            >Emergency Information</b-nav-item
-          >
-          <b-nav-item to="/faq" exact exact-active-class="active"
-            >FAQ</b-nav-item
-          >
-          <b-nav-item
+            <router-link to="/emergencyInformation" class="nav-link"
+              >Emergency Information</router-link
+            >
+          </li>
+          <li class="nav-item" :class="{ active: $route.path === '/faq' }">
+            <router-link to="/faq" class="nav-link">FAQ</router-link>
+          </li>
+          <li
+            class="nav-item"
             v-if="isAuthenticated"
-            to="/dashboard"
-            exact
-            exact-active-class="active"
-            >Dashboard</b-nav-item
+            :class="{ active: $route.path === '/dashboard' }"
           >
-        </b-navbar-nav>
+            <router-link to="/dashboard" class="nav-link"
+              >Dashboard</router-link
+            >
+          </li>
+        </ul>
 
-        <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto">
-          <template v-if="!isAuthenticated">
-            <b-nav-item
-              @click="$router.push('/signUp')"
-              size="sm"
-              class="my-2 my-sm-0 mr-2 btn btn-primary"
-              >Sign Up</b-nav-item
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <router-link
+              v-if="!isAuthenticated"
+              to="/signUp"
+              class="nav-link btn btn-primary"
+              >Sign Up</router-link
             >
-            <b-nav-item
-              @click="$router.push('/signIn')"
-              size="sm"
-              class="my-2 my-sm-0 mr-2 btn btn-primary"
-              >Sign In</b-nav-item
+          </li>
+          <li class="nav-item">
+            <router-link
+              v-if="!isAuthenticated"
+              to="/signIn"
+              class="nav-link btn btn-primary"
+              >Sign In</router-link
             >
-          </template>
-          <template v-else>
-            <b-button
-              size="sm"
-              class="my-2 my-sm-0 mr-2"
-              type="submit"
-              @click.prevent="logOut"
-              >Sign Out</b-button
+          </li>
+          <li class="nav-item">
+            <button
+              v-if="isAuthenticated"
+              class="btn btn-primary"
+              @click="logOut"
             >
-          </template>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
+              Sign Out
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
   </div>
 </template>
 
@@ -90,31 +110,5 @@ export default {
 <style scoped>
 .bg-info {
   background-color: #011f4b !important;
-}
-
-.btn-primary {
-  color: white;
-  background-color: #011f4b;
-  border: 1px solid white; /* Example: 2px width white border */
-}
-
-.btn-secondary {
-  color: white;
-  background-color: #011f4b;
-  border-color: white;
-}
-
-.btn-secondary:hover {
-  color: black !important;
-  background-color: #d25a04 !important;
-  border-color: 1px solid black !important;
-}
-
-button.btn-primary:hover,
-button.btn-primary:focus,
-button.btn-primary:active {
-  color: black !important;
-  background-color: #d25a04 !important;
-  border-color: black !important;
 }
 </style>

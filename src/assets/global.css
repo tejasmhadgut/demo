@@ -1,0 +1,12 @@
+/* Adding custom  font for the project */
+@font-face {
+    font-family: 'General Sans';
+    src: url('@/assets/fonts/GeneralSans-Medium.woff2') format('woff2'),
+    url('@/assets/fonts/GeneralSans-Bold.woff2') format('woff2');
+    
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    font-family: 'General Sans', sans-serif !important;
+}
